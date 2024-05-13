@@ -59,6 +59,7 @@
     <!-- List of available commands -->
     <div class="commands">
       <ul>
+        <li>page (current color) - Change background color to the specified color</li>
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -117,27 +118,10 @@
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
           }
 
-          // Add the command to the list of available commands
-          if (!availableCommands.includes(command)) {
-            availableCommands.push(command);
-            updateCommandsList();
-          }
-
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
         }
       });
-
-      // Function to update the list of available commands
-      function updateCommandsList() {
-        const commandsUl = commandsList.querySelector('ul');
-        commandsUl.innerHTML = ''; // Clear the existing list
-        availableCommands.forEach(command => {
-          const li = document.createElement('li');
-          li.textContent = command;
-          commandsUl.appendChild(li);
-        });
-      }
     });
   </script>
 </body>
