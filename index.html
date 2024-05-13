@@ -57,28 +57,34 @@
           const command = consoleInput.value.trim();
           consoleInput.value = '';
 
-          // Example command: page green
-          if (command === 'page green') {
-            document.body.style.backgroundColor = '#00FF00'; // Change background color to green
-            consoleOutput.innerHTML += '<p>Page turned to green.</p>';
+          // List of available commands
+          const availableCommands = [
+            'help - Display available commands',
+            'page green - Change background color to green',
+            // Add more commands here
+          ];
+
+          // Check if the command is in the list of available commands
+          if (availableCommands.includes(command)) {
+            // Execute the command
+            if (command === 'page green') {
+              document.body.style.backgroundColor = '#00FF00'; // Change background color to green
+              consoleOutput.innerHTML += '<p>Page turned to green.</p>';
+            } else if (command === 'help') {
+              // Display help message
+              consoleOutput.innerHTML += `
+                <p>Welcome to the Console!</p>
+                <p>Available Commands:</p>
+                <ul>
+                  ${availableCommands.map(cmd => `<li>${cmd}</li>`).join('')}
+                </ul>
+              `;
+            }
           } else {
-            consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
+            // Display error message if the command is not recognized
+            consoleOutput.innerHTML += `<p>Command '${command}' not recognized. Type 'help' for available commands.</p>`;
           }
 
-          if (command === 'help') {
-    consoleOutput.innerHTML += `
-        <p>Welcome to the Console!</p>
-        <p>To use this console, type commands in the input box below and press Enter.</p>
-        <p>Available Commands:</p>
-        <ul>
-            <li>help - Display this help message.</li>
-            <!-- Add your custom commands and descriptions here -->
-            <li>your_custom_command - Description of your custom command.</li>
-        </ul>
-    `;
-} else {
-    consoleOutput.innerHTML += `<p>Command '${command}' not recognized. Type 'help' for available commands.</p>`;
-}
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
         }
