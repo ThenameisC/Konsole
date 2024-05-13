@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #272822;
+    }
+
+    .console {
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 10px;
+      width: 400px;
+      margin: 100px auto;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .output {
+      height: 200px;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 5px;
+      border: none;
+      background-color: #333;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="console">
+    <div class="output"></div>
+    <input type="text" class="input" autofocus>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const consoleOutput = document.querySelector('.output');
+      const consoleInput = document.querySelector('.input');
+
+      consoleInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const command = consoleInput.value.trim();
+          consoleInput.value = '';
+
+          // Example command: test
+          if (command === 'test') {
+            consoleOutput.innerHTML += '<p>Test command executed.</p>';
+          } else {
+            consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
+          }
+
+          // Scroll to bottom of console output
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
