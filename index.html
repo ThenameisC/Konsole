@@ -45,6 +45,10 @@
     .commands {
       display: none;
       color: #00FFFF;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      max-height: 50px; /* Adjust height as needed */
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -55,8 +59,7 @@
     <!-- List of available commands -->
     <div class="commands">
       <ul>
-        <li>page green - Change background color to green</li>
-        <li>page default - Reset background color to default</li>
+        <li>page (color) - Change background color to the specified color</li>
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -73,17 +76,7 @@
         if (typedCommand === '') {
           commandsList.style.display = 'none';
         } else {
-          const filteredCommands = Array.from(commandsList.querySelectorAll('li')).filter(command => {
-            return command.textContent.toLowerCase().startsWith(typedCommand);
-          });
-          if (filteredCommands.length > 0) {
-            commandsList.style.display = 'block';
-            filteredCommands.forEach(command => {
-              command.style.display = 'block';
-            });
-          } else {
-            commandsList.style.display = 'none';
-          }
+          commandsList.style.display = 'block';
         }
       });
 
@@ -95,33 +88,26 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'page green',
-            'page default'
+            'page (color)'
             // Add more commands here
           ];
 
           // Check if the command is in the list of available commands
           if (availableCommands.includes(command)) {
             // Execute the command
-            if (command === 'page green') {
-              document.body.style.backgroundColor = '#00FF00'; // Change background color to green
-              consoleOutput.innerHTML += '<p>Page turned to green.</p>';
-            } else if (command === 'page default') {
-              document.body.style.backgroundColor = ''; // Reset background color to default
-              consoleOutput.innerHTML += '<p>Page color reset to default.</p>';
-            } else if (command === 'help') {
+            if (command === 'help') {
               // Display help message
               consoleOutput.innerHTML += `
                 <p>Welcome to the Console!</p>
                 <p>To use this console, type commands in the input box below and press Enter.</p>
                 <p>To see available commands, start typing and available commands will be displayed.</p>
               `;
+            } else if (command.startsWith('page ')) {
+              // Set background color to the specified color
+              const color = command.substring(5).toLowerCase(); // Extract color name from the command
+              document.body.style.backgroundColor = color; // Change background color to the specified color
+              consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
             }
-          } else if (command.startsWith('page ')) {
-            // Set background color to the specified color
-            const color = command.substring(5).toLowerCase(); // Extract color name from the command
-            document.body.style.backgroundColor = color; // Change background color to the specified color
-            consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
