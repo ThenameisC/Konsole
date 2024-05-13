@@ -88,7 +88,7 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'page (color)'
+            'page'
             // Add more commands here
           ];
 
@@ -102,12 +102,12 @@
                 <p>To use this console, type commands in the input box below and press Enter.</p>
                 <p>To see available commands, start typing and available commands will be displayed.</p>
               `;
-            } else if (command.startsWith('page ')) {
-              // Set background color to the specified color
-              const color = command.substring(5).toLowerCase(); // Extract color name from the command
-              document.body.style.backgroundColor = color; // Change background color to the specified color
-              consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
             }
+          } else if (command.startsWith('page ')) {
+            // Set background color to the specified color
+            const color = command.substring(5).toLowerCase(); // Extract color name from the command
+            document.body.style.backgroundColor = color; // Change background color to the specified color
+            consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
