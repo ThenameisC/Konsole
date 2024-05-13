@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Console Example</title>
+  <title>Konsole</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -65,6 +65,20 @@
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
           }
 
+          if (command === 'help') {
+    consoleOutput.innerHTML += `
+        <p>Welcome to the Console!</p>
+        <p>To use this console, type commands in the input box below and press Enter.</p>
+        <p>Available Commands:</p>
+        <ul>
+            <li>help - Display this help message.</li>
+            <!-- Add your custom commands and descriptions here -->
+            <li>your_custom_command - Description of your custom command.</li>
+        </ul>
+    `;
+} else {
+    consoleOutput.innerHTML += `<p>Command '${command}' not recognized. Type 'help' for available commands.</p>`;
+}
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
         }
