@@ -57,9 +57,10 @@
           const command = consoleInput.value.trim();
           consoleInput.value = '';
 
-          // Example command: test
-          if (command === 'test') {
-            consoleOutput.innerHTML += '<p>Test command executed.</p>';
+          // Example command: page green
+          if (command === 'page green') {
+            document.body.style.backgroundColor = '#00FF00'; // Change background color to green
+            consoleOutput.innerHTML += '<p>Page turned to green.</p>';
           } else {
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
           }
