@@ -60,7 +60,8 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'page green'
+            'page green',
+            'page default'
             // Add more commands here
           ];
 
@@ -70,6 +71,9 @@
             if (command === 'page green') {
               document.body.style.backgroundColor = '#00FF00'; // Change background color to green
               consoleOutput.innerHTML += '<p>Page turned to green.</p>';
+            } else if (command === 'page default') {
+              document.body.style.backgroundColor = ''; // Reset background color to default
+              consoleOutput.innerHTML += '<p>Page color reset to default.</p>';
             } else if (command === 'help') {
               // Display help message
               consoleOutput.innerHTML += `
