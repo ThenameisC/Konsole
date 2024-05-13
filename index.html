@@ -40,17 +40,31 @@
     .input:focus {
       outline: none;
     }
+
+    /* Hide the list of available commands */
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="console">
     <div class="output"></div>
     <input type="text" class="input" autofocus>
+    <!-- List of available commands (hidden) -->
+    <div class="hidden">
+      <ul class="commands">
+        <li>page green - Change background color to green</li>
+        <li>page default - Reset background color to default</li>
+        <!-- Add more commands here -->
+      </ul>
+    </div>
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const consoleOutput = document.querySelector('.output');
       const consoleInput = document.querySelector('.input');
+      const commandsList = document.querySelector('.commands');
 
       consoleInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
@@ -78,15 +92,18 @@
               // Display help message
               consoleOutput.innerHTML += `
                 <p>Welcome to the Console!</p>
-                <p>Available Commands:</p>
-                <ul>
-                  ${availableCommands.map(cmd => `<li>${cmd}</li>`).join('')}
-                </ul>
+                <p>To use this console, type commands in the input box below and press Enter.</p>
+                <p>To see available commands, you'll have to figure them out by typing commands yourself!</p>
               `;
             }
+          } else if (command.startsWith('page ')) {
+            // Set background color to the specified color
+            const color = command.substring(5).toLowerCase(); // Extract color name from the command
+            document.body.style.backgroundColor = color; // Change background color to the specified color
+            consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
           } else {
             // Display error message if the command is not recognized
-            consoleOutput.innerHTML += `<p>Command '${command}' not recognized. Type 'help' for available commands.</p>`;
+            consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
           }
 
           // Scroll to bottom of console output
