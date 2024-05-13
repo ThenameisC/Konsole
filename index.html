@@ -59,7 +59,7 @@
     <!-- List of available commands -->
     <div class="commands">
       <ul>
-        <li>page (current color) - Change background color to the specified color</li>
+        <li>page (color) - Change background color to the specified color</li>
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -104,15 +104,10 @@
               `;
             }
           } else if (command.startsWith('page ')) {
-            // Set background color to the specified color or display current color
+            // Set background color to the specified color
             const color = command.substring(5).toLowerCase(); // Extract color name from the command
-            if (color === '') {
-              const currentColor = document.body.style.backgroundColor || 'default';
-              consoleOutput.innerHTML += `<p>Current background color is ${currentColor}.</p>`;
-            } else {
-              document.body.style.backgroundColor = color; // Change background color to the specified color
-              consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
-            }
+            document.body.style.backgroundColor = color; // Change background color to the specified color
+            consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
