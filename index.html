@@ -78,6 +78,9 @@
             consoleOutput.innerHTML += `<p>Good job! You now know how it works.</p>`;
             consoleOutput.innerHTML += `<p>We won't give you any more commands though!</p>`;
             consoleOutput.innerHTML += `<p>And hey, don't go diving through code to find them.</p>`;
+          } else if (command === 'sr3d') {
+            // Redirect to SnowRider3DMod website
+            window.location.href = 'https://thenameisc.github.io/SnowRider3DMod/';
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
