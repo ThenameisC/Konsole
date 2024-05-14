@@ -43,22 +43,9 @@
       outline: none;
     }
 
-    /* Show the list of available commands when typing similar letters */
+    /* Hide the list of available commands */
     .commands {
-      color: #00FFFF;
-      font-family: Georgia, serif;
-      font-size: 14px;
-      max-height: 100px; /* Adjust height as needed */
-      overflow-y: auto;
-    }
-
-    .commands ul {
-      padding: 0;
-      margin: 5px 0;
-    }
-
-    .commands li {
-      list-style-type: none;
+      display: none;
     }
   </style>
 </head>
@@ -66,20 +53,11 @@
   <div class="console">
     <div class="output"></div>
     <input type="text" class="input" autofocus placeholder="Type a command...">
-    <!-- List of available commands -->
-    <div class="commands">
-      <ul>
-        <li>sv_cheats 1 - That's for cheaters!</li>
-        <li>sr3d - Go to SnowRider3DMod website</li>
-        <!-- Add more commands here -->
-      </ul>
-    </div>
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const consoleOutput = document.querySelector('.output');
       const consoleInput = document.querySelector('.input');
-      const commandsList = document.querySelector('.commands');
 
       // Execute command when Enter key is pressed
       consoleInput.addEventListener('keypress', function(e) {
@@ -87,30 +65,19 @@
           const command = consoleInput.value.trim();
           consoleInput.value = '';
 
-          // List of available commands
-          const availableCommands = [
-            'help',
-            'sv_cheats 1',
-            'sr3d' // Add more commands here
-          ];
-
-          // Check if the command is in the list of available commands
-          if (availableCommands.includes(command)) {
-            // Execute the command
-            if (command === 'help') {
-              // Display help message
-              consoleOutput.innerHTML += `
-                <p>Welcome to the Console!</p>
-                <p>Type 'sv_cheats 1' just for fun!</p>
-                <p>Type 'sr3d' to visit SnowRider3DMod website.</p>
-              `;
-            } else if (command === 'sv_cheats 1') {
-              // Response for sv_cheats 1 command
-              consoleOutput.innerHTML += `<p>That's for cheaters!</p>`;
-            } else if (command === 'sr3d') {
-              // Redirect to SnowRider3DMod website
-              window.location.href = 'https://thenameisc.github.io/SnowRider3DMod/';
-            }
+          // Execute the command
+          if (command === 'help') {
+            // Display help message
+            consoleOutput.innerHTML += `
+              <p>Welcome to the Console!</p>
+              <p>Type 'test' to see how it works.</p>
+              <p>Remember, we won't give you any more commands!</p>
+            `;
+          } else if (command === 'test') {
+            // Response for test command
+            consoleOutput.innerHTML += `<p>Good job! You now know how it works.</p>`;
+            consoleOutput.innerHTML += `<p>We won't give you any more commands though!</p>`;
+            consoleOutput.innerHTML += `<p>And hey, don't go diving through code to find them.</p>`;
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
@@ -118,16 +85,6 @@
 
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
-        }
-      });
-
-      // Show/hide commands list when typing in the input box
-      consoleInput.addEventListener('input', function() {
-        const typedCommand = consoleInput.value.trim().toLowerCase();
-        if (typedCommand === '' || !typedCommand.startsWith('sv_cheats') || !typedCommand.startsWith('sr3d')) {
-          commandsList.style.display = 'none';
-        } else {
-          commandsList.style.display = 'block';
         }
       });
     });
