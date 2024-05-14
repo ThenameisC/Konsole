@@ -100,8 +100,14 @@
             } else {
               consoleOutput.innerHTML += `<p>The page is not upside down.</p>`;
             }
-          } else if (command === 'sv_cheats 1') {
-            consoleOutput.innerHTML += `<p>sv_cheats changed to 1. But this isn't a source engine game, what DO you expect?</p>`;
+          } else if (command.startsWith('sv_cheats')) {
+            // Handle sv_cheats command
+            const parts = command.split(' ');
+            if (parts.length === 2 && parts[1] === '1') {
+              consoleOutput.innerHTML += `<p>sv_cheats changed to 1. But this isn't a source engine game, what DO you expect?</p>`;
+            } else {
+              consoleOutput.innerHTML += `<p>${command} not recognized.</p>`;
+            }
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
