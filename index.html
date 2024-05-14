@@ -58,12 +58,18 @@
     document.addEventListener("DOMContentLoaded", function() {
       const consoleOutput = document.querySelector('.output');
       const consoleInput = document.querySelector('.input');
+      let commandHistory = [];
+      let historyIndex = 0;
 
       // Execute command when Enter key is pressed
       consoleInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           const command = consoleInput.value.trim();
           consoleInput.value = '';
+
+          // Add command to history
+          commandHistory.push(command);
+          historyIndex = commandHistory.length;
 
           // Execute the command
           if (command === 'help') {
@@ -88,6 +94,24 @@
 
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+      });
+
+      // Handle up arrow key press for command history
+      consoleInput.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowUp') {
+          if (historyIndex > 0) {
+            historyIndex--;
+            consoleInput.value = commandHistory[historyIndex];
+          }
+        } else if (e.key === 'ArrowDown') {
+          if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            consoleInput.value = commandHistory[historyIndex];
+          } else {
+            historyIndex = commandHistory.length;
+            consoleInput.value = '';
+          }
         }
       });
     });
