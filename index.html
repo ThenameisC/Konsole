@@ -90,7 +90,6 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'page',
             'sv_cheats 1' // Add more commands here
           ];
 
@@ -106,7 +105,7 @@
               `;
             } else if (command.startsWith('page ')) {
               // Set background color to the specified color
-              const color = command.substring(5).toLowerCase(); // Extract color name from the command
+              const color = command.substring(5).trim().toLowerCase(); // Extract color name from the command
               document.body.style.backgroundColor = color; // Change background color
               consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
             } else if (command === 'sv_cheats 1') {
