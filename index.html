@@ -69,8 +69,8 @@
     <!-- List of available commands -->
     <div class="commands">
       <ul>
-        <li>page (color) - Change background color to the specified color</li>
         <li>sv_cheats 1 - That's for cheaters!</li>
+        <li>sr3d - Go to SnowRider3DMod website</li>
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -90,7 +90,8 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'sv_cheats 1' // Add more commands here
+            'sv_cheats 1',
+            'sr3d' // Add more commands here
           ];
 
           // Check if the command is in the list of available commands
@@ -100,17 +101,15 @@
               // Display help message
               consoleOutput.innerHTML += `
                 <p>Welcome to the Console!</p>
-                <p>Type 'page (color)' to change background color.</p>
                 <p>Type 'sv_cheats 1' just for fun!</p>
+                <p>Type 'sr3d' to visit SnowRider3DMod website.</p>
               `;
-            } else if (command.startsWith('page ')) {
-              // Set background color to the specified color
-              const color = command.substring(5).trim().toLowerCase(); // Extract color name from the command
-              document.body.style.backgroundColor = color; // Change background color
-              consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
             } else if (command === 'sv_cheats 1') {
               // Response for sv_cheats 1 command
               consoleOutput.innerHTML += `<p>That's for cheaters!</p>`;
+            } else if (command === 'sr3d') {
+              // Redirect to SnowRider3DMod website
+              window.location.href = 'https://thenameisc.github.io/SnowRider3DMod/';
             }
           } else {
             // Display error message if the command is not recognized
@@ -125,7 +124,7 @@
       // Show/hide commands list when typing in the input box
       consoleInput.addEventListener('input', function() {
         const typedCommand = consoleInput.value.trim().toLowerCase();
-        if (typedCommand === '' || !typedCommand.startsWith('page')) {
+        if (typedCommand === '' || !typedCommand.startsWith('sv_cheats') || !typedCommand.startsWith('sr3d')) {
           commandsList.style.display = 'none';
         } else {
           commandsList.style.display = 'block';
