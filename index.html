@@ -100,6 +100,8 @@
             } else {
               consoleOutput.innerHTML += `<p>The page is not upside down.</p>`;
             }
+          } else if (command === 'sv_cheats 1') {
+            consoleOutput.innerHTML += `<p>sv_cheats changed to 1. But this isn't a source engine game, what DO you expect?</p>`;
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
