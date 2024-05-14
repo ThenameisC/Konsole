@@ -75,16 +75,10 @@
       const consoleInput = document.querySelector('.input');
       const commandsList = document.querySelector('.commands');
 
-      // Show commands list when typing similar letters in the input box
+      // Show commands list when typing in the input box
       consoleInput.addEventListener('input', function() {
         const typedCommand = consoleInput.value.trim().toLowerCase();
-        const availableCommands = [
-          'page',
-          'sv_cheats 1'
-          // Add more commands here
-        ];
-        const matchingCommands = availableCommands.filter(cmd => cmd.includes(typedCommand));
-        if (matchingCommands.length > 0) {
+        if (typedCommand.startsWith('page')) {
           commandsList.classList.add('active');
         } else {
           commandsList.classList.remove('active');
