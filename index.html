@@ -114,6 +114,9 @@
             // Shrink the console
             consoleContainer.style.width = '200px';
             consoleOutput.innerHTML += `<p>Made site smaller.</p>`;
+          } else if (command === 'never') {
+            // Redirect to the given URL
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
