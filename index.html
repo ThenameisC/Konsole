@@ -87,6 +87,11 @@
           } else if (command === 'sr3d') {
             // Redirect to SnowRider3DMod website
             window.location.href = 'https://thenameisc.github.io/SnowRider3DMod/';
+          } else if (command === 'upside_down') {
+            // Prompt warning before flipping screen upside down
+            if (confirm("This will flip the screen upside down. Are you sure?")) {
+              document.body.style.transform = "rotate(180deg)";
+            }
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
