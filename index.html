@@ -92,6 +92,13 @@
             if (confirm("This will flip the screen upside down. Are you sure?")) {
               document.body.style.transform = "rotate(180deg)";
             }
+          } else if (command === 'rightside_up') {
+            // Check if the page is upside down
+            if (document.body.style.transform === "rotate(180deg)") {
+              document.body.style.transform = "none";
+            } else {
+              consoleOutput.innerHTML += `<p>The page is not upside down.</p>`;
+            }
           } else {
             // Display error message if the command is not recognized
             consoleOutput.innerHTML += `<p>Command '${command}' not recognized.</p>`;
