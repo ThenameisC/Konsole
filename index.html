@@ -96,6 +96,7 @@
             // Check if the page is upside down
             if (document.body.style.transform === "rotate(180deg)") {
               document.body.style.transform = "none";
+              consoleOutput.innerHTML += `<p>Page flipped right side up.</p>`;
             } else {
               consoleOutput.innerHTML += `<p>The page is not upside down.</p>`;
             }
