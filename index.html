@@ -41,7 +41,7 @@
       outline: none;
     }
 
-    /* Show the list of available commands */
+    /* Show the list of available commands when typing similar letters */
     .commands {
       display: none;
       color: #00FFFF;
@@ -49,6 +49,10 @@
       font-size: 14px;
       max-height: 50px; /* Adjust height as needed */
       overflow-y: auto;
+    }
+
+    .commands.active {
+      display: block;
     }
   </style>
 </head>
@@ -59,8 +63,8 @@
     <!-- List of available commands -->
     <div class="commands">
       <ul>
-        <li>page (color) - Change background color to the specified color</li>
-        <li>sv_cheats 1 - That's for cheaters!</li> <!-- Added the sv_cheats 1 command -->
+        <li>page (color)</li>
+        <li>sv_cheats 1</li> <!-- Removed the description for commands -->
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -71,13 +75,19 @@
       const consoleInput = document.querySelector('.input');
       const commandsList = document.querySelector('.commands');
 
-      // Show commands list when typing in the input box
+      // Show commands list when typing similar letters in the input box
       consoleInput.addEventListener('input', function() {
         const typedCommand = consoleInput.value.trim().toLowerCase();
-        if (typedCommand === '') {
-          commandsList.style.display = 'none';
+        const availableCommands = [
+          'page',
+          'sv_cheats 1'
+          // Add more commands here
+        ];
+        const matchingCommands = availableCommands.filter(cmd => cmd.includes(typedCommand));
+        if (matchingCommands.length > 0) {
+          commandsList.classList.add('active');
         } else {
-          commandsList.style.display = 'block';
+          commandsList.classList.remove('active');
         }
       });
 
