@@ -26,6 +26,7 @@
       height: 200px;
       overflow-y: scroll;
       margin-bottom: 10px;
+      border-bottom: 1px solid #333;
     }
 
     .input {
@@ -35,6 +36,7 @@
       background-color: #333;
       color: #fff;
       font-size: 16px;
+      border-radius: 3px;
     }
 
     .input:focus {
@@ -43,28 +45,32 @@
 
     /* Show the list of available commands when typing similar letters */
     .commands {
-      display: none;
       color: #00FFFF;
       font-family: Georgia, serif;
       font-size: 14px;
-      max-height: 50px; /* Adjust height as needed */
+      max-height: 100px; /* Adjust height as needed */
       overflow-y: auto;
     }
 
-    .commands.active {
-      display: block;
+    .commands ul {
+      padding: 0;
+      margin: 5px 0;
+    }
+
+    .commands li {
+      list-style-type: none;
     }
   </style>
 </head>
 <body>
   <div class="console">
     <div class="output"></div>
-    <input type="text" class="input" autofocus>
+    <input type="text" class="input" autofocus placeholder="Type a command...">
     <!-- List of available commands -->
     <div class="commands">
       <ul>
-        <li>page (color)</li>
-        <li>sv_cheats 1</li> <!-- Removed the description for commands -->
+        <li>page (color) - Change background color to the specified color</li>
+        <li>sv_cheats 1 - That's for cheaters!</li>
         <!-- Add more commands here -->
       </ul>
     </div>
@@ -75,16 +81,7 @@
       const consoleInput = document.querySelector('.input');
       const commandsList = document.querySelector('.commands');
 
-      // Show commands list when typing in the input box
-      consoleInput.addEventListener('input', function() {
-        const typedCommand = consoleInput.value.trim().toLowerCase();
-        if (typedCommand.startsWith('page')) {
-          commandsList.classList.add('active');
-        } else {
-          commandsList.classList.remove('active');
-        }
-      });
-
+      // Execute command when Enter key is pressed
       consoleInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           const command = consoleInput.value.trim();
@@ -93,8 +90,8 @@
           // List of available commands
           const availableCommands = [
             'help',
-            'sv_cheats 1' // Added the sv_cheats 1 command
-            // Add more commands here
+            'page',
+            'sv_cheats 1' // Add more commands here
           ];
 
           // Check if the command is in the list of available commands
@@ -104,13 +101,13 @@
               // Display help message
               consoleOutput.innerHTML += `
                 <p>Welcome to the Console!</p>
-                <p>To use this console, type commands in the input box below and press Enter.</p>
-                <p>To see available commands, start typing and available commands will be displayed.</p>
+                <p>Type 'page (color)' to change background color.</p>
+                <p>Type 'sv_cheats 1' just for fun!</p>
               `;
             } else if (command.startsWith('page ')) {
               // Set background color to the specified color
               const color = command.substring(5).toLowerCase(); // Extract color name from the command
-              document.body.style.backgroundColor = color; // Change background color to the specified color
+              document.body.style.backgroundColor = color; // Change background color
               consoleOutput.innerHTML += `<p>Page turned to ${color}.</p>`;
             } else if (command === 'sv_cheats 1') {
               // Response for sv_cheats 1 command
@@ -123,6 +120,16 @@
 
           // Scroll to bottom of console output
           consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+      });
+
+      // Show/hide commands list when typing in the input box
+      consoleInput.addEventListener('input', function() {
+        const typedCommand = consoleInput.value.trim().toLowerCase();
+        if (typedCommand === '' || !typedCommand.startsWith('page')) {
+          commandsList.style.display = 'none';
+        } else {
+          commandsList.style.display = 'block';
         }
       });
     });
